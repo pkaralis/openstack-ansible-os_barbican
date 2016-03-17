@@ -15,9 +15,13 @@ Default Variables
 Required Variables
 ==================
 
-barbican_service_password
+barbican_galera_address
 barbican_galera_password
 barbican_rabbitmq_password
+barbican_service_password
+keystone_admin_user_name
+keystone_auth_admin_password
+keystone_admin_tenant_name
 
 Example Playbook
 ================
@@ -36,3 +40,6 @@ Example Playbook
        barbican_service_password: SuperSecretePassword1
        barbican_galera_password: SuperSecretePassword2
        barbican_rabbitmq_password: SuperSecretePassword3
+       keystone_admin_user_name: admin
+       keystone_auth_admin_password: SuperSecretePassword4
+       keystone_admin_tenant_name: admin
