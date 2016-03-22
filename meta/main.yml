@@ -1,9 +1,8 @@
 galaxy_info:
-  author: Ian Cordasco
-  description: Deploy OpenStack's Barbican 
-  company: Rackspace
-  # issue_tracker_url: http://example.com/issue/tracker
-  license: Apache
+  author: OpenStack-Ansible
+  description: Deploy Barbican with OpenStack-Ansible
+  company: OpenStack
+  license: Apache-2.0
   min_ansible_version: 1.9
   platforms:
   - name: Ubuntu

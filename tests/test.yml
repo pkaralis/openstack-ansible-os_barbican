@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - openstack-ansible-barbican
+    - role: "{{ rolename | basename }}"
