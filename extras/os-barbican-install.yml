@@ -74,6 +74,61 @@
       when: is_metal | bool
       tags:
         - barbican-logs
+    - name: Ensure Rabbitmq vhost
+      rabbitmq_vhost:
+        name: "{{ barbican_rabbitmq_vhost }}"
+        state: "present"
+      delegate_to: "{{ groups['rabbitmq_all'][0] }}"
+      when:
+        - inventory_hostname == groups['barbican_all'][0]
+        - groups['rabbitmq_all']|length > 0
+      tags:
+        - barbican-rabbitmq
+        - barbican-rabbitmq-vhost
+    - name: Ensure rabbitmq user
+      rabbitmq_user:
+        user: "{{ barbican_rabbitmq_userid }}"
+        password: "{{ barbican_rabbitmq_password }}"
+        vhost: "{{ barbican_rabbitmq_vhost }}"
+        configure_priv: ".*"
+        read_priv: ".*"
+        write_priv: ".*"
+        state: "present"
+      delegate_to: "{{ groups['rabbitmq_all'][0] }}"
+      when:
+        - inventory_hostname == groups['barbican_all'][0]
+        - groups['rabbitmq_all']|length > 0
+      tags:
+        - barbican-rabbitmq
+        - barbican-rabbitmq-user
+    - name: Keystone create DB for service
+      mysql_db:
+        login_user: "{{ galera_root_user }}"
+        login_password: "{{ galera_root_password }}"
+        login_host: "{{ galera_address }}"
+        name: "{{ barbican_galera_database }}"
+        state: "present"
+      when: inventory_hostname == groups['barbican_all'][0]
+      delegate_to: "{{ groups['galera_all'][0] }}"
+      tags:
+        - mysql-db-setup
+    - name: Keystone grant access to the DB for the service
+      mysql_user:
+        login_user: "{{ galera_root_user }}"
+        login_password: "{{ galera_root_password }}"
+        login_host: "{{ galera_address }}"
+        name: "{{ barbican_galera_database }}"
+        password: "{{ barbican_galera_password }}"
+        host: "{{ item }}"
+        state: "present"
+        priv: "{{ barbican_galera_database }}.*:ALL"
+      with_items:
+        - "localhost"
+        - "%"
+      when: inventory_hostname == groups['barbican_all'][0]
+      delegate_to: "{{ groups['galera_all'][0] }}"
+      tags:
+        - mysql-db-setup
   roles:
     - role: "openstack-ansible-barbican"
       barbican_galera_address: "{{ galera_address }}"
@@ -85,12 +140,12 @@
           bind_port: "{{ barbican_service_port }}"
           rpc_backend: "{{ barbican_rpc_backend }}"
           host_href: "http://{{ barbican_rpc_backend }}:{{ barbican_service_port }}"
-          sql_connection: "mysql://{{ barbican_galera_user}}:{{ barbican_galera_password}}@{{ barbican_galera_address }}/{{ barbican_galera_database_name }}?charset=utf8"
+          sql_connection: "mysql://{{ barbican_galera_user}}:{{ barbican_galera_password }}@{{ barbican_galera_address }}/{{ barbican_galera_database }}?charset=utf8"
           rabbit_port: "{{ rabbitmq_port }}"
           rabbit_hosts: "{{ rabbitmq_servers }}"
           rabbit_userid: "{{ barbican_rabbitmq_userid }}"
           rabbit_password: "{{ barbican_rabbitmq_password }}"
-          rabbit_virtual_host: "{{ barbican_rabbitmq_virtualhost }}"
+          rabbit_virtual_host: "{{ barbican_rabbitmq_vhost }}"
           rabbit_use_ssl: "{{ rabbitmq_use_ssl }}"
           rabbit_notification_exchange: barbican
           rabbit_notification_topic: notification
@@ -99,7 +154,7 @@
           rabbit_port: "{{ rabbitmq_port }}"
           rabbit_userid: "{{ barbican_rabbitmq_userid }}"
           rabbit_password: "{{ barbican_rabbitmq_password }}"
-          rabbit_virtual_host: "{{ barbican_rabbitmq_virtualhost }}"
+          rabbit_virtual_host: "{{ barbican_rabbitmq_vhost }}"
           rabbit_use_ssl: "{{ rabbitmq_use_ssl }}"
           rabbit_notification_exchange: barbican
           rabbit_notification_topic: notification
