@@ -39,11 +39,55 @@
     - barbican-apt-packages
     - barbican-install
 
+- name: Create developer mode constraint file
+  copy:
+    dest: "/opt/developer-pip-constraints.txt"
+    content: |
+      {% for item in barbican_developer_constraints %}
+      {{ item }}
+      {% endfor %}
+  when:
+    - barbican_developer_mode | bool
+  tags:
+    - barbican-install
+    - barbican-pip-packages
+
+- name: Clone requirements git repository
+  git:
+    repo: "{{ barbican_requirements_git_repo }}"
+    dest: "/opt/requirements"
+    clone: yes
+    update: yes
+    version: "{{ barbican_requirements_git_install_branch }}"
+  when:
+    - barbican_developer_mode | bool
+  tags:
+    - barbican-install
+    - barbican-pip-packages
+
+- name: Add constraints to pip_install_options fact for developer mode
+  set_fact:
+    pip_install_options_fact: "{{ pip_install_options|default('') }} --constraint /opt/developer-pip-constraints.txt --constraint /opt/requirements/upper-constraints.txt"
+  when:
+    - barbican_developer_mode | bool
+  tags:
+    - barbican-install
+    - barbican-pip-packages
+
+- name: Set pip_install_options_fact when not in developer mode
+  set_fact:
+    pip_install_options_fact: "{{ pip_install_options|default('') }}"
+  when:
+    - not barbican_developer_mode | bool
+  tags:
+    - barbican-install
+    - barbican-pip-packages
+
 - name: Install pip packages for Barbican
   pip:
     name: "{{ item }}"
     state: "present"
-    extra_args: "{{ pip_install_options |default('') }}"
+    extra_args: "{{ pip_install_options_fact }}"
   register: install_barbican_pip_packages
   until: install_barbican_pip_packages |success
   retries: 5

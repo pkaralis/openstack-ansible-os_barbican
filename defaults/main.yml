@@ -53,17 +53,24 @@ barbican_api_audit_map_overrides: {}
 barbican_vassals_api_overrides: {}
 
 barbican_git_repo: "https://git.openstack.org/openstack/barbican"
-barbican_git_install_branch: 7b0cce90a59e5690d0a53a9dd3ef551103022845
+barbican_git_install_branch: master
 barbican_git_dest: "/opt/barbican_{{ barbican_git_install_branch |replace('/', '_') }}"
 
+barbican_requirements_git_repo: https://git.openstack.org/openstack/requirements
+barbican_requirements_git_install_branch: master
+
+barbican_developer_mode: false
+barbican_developer_constraints:
+  - "git+{{ barbican_git_repo }}@{{ barbican_git_install_branch }}#egg=barbican"
+
 # Database vars
-barbican_galera_database_name: barbican_service
+barbican_galera_database: barbican
 barbican_galera_user: barbican
 
 # Rabbit vars
 barbican_rpc_backend: rabbit
 barbican_rabbitmq_userid: barbican
-barbican_rabbitmq_virtualhost: /barbican
+barbican_rabbitmq_vhost: /barbican
 
 # Keystone AuthToken/Middleware
 barbican_keystone_auth_plugin: password
@@ -135,6 +142,7 @@ barbican_pip_packages:
   - pecan
   - pycadf
   - pycrypto
+  - PyMySQL
   - pyOpenSSL
   - ldap3
   - keystonemiddleware

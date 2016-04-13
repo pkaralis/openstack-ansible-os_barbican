@@ -15,7 +15,11 @@ galaxy_info:
   - barbican
 
 dependencies:
+  - role: pip_lock_down
+    when:
+      - not barbican_developer_mode | bool
+  - role: pip_install
+    when:
+      - barbican_developer_mode | bool
   - apt_package_pinning
   - galera_client
-  - pip_install
-  - pip_lock_down

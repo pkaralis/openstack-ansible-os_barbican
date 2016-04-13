@@ -13,36 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Create Barbican's database tables
-  mysql_db:
-    login_user: "{{ galera_root_user }}"
-    login_password: "{{ galera_root_password }}"
-    login_host: "{{ barbican_galera_address }}"
-    name: "{{ barbican_galera_database_name }}"
-    state: "present"
-  tags:
-    - barbican-database-setup
-    - barbican-db-setup
-    - barbican-setup
-
-- name: Give Barbican database access
-  mysql_user:
-    login_user: "{{ galera_root_user }}"
-    login_password: "{{ galera_root_password }}"
-    login_host: "{{ barbican_galera_address }}"
-    name: "{{ barbican_galera_user }}"
-    password: "{{ barbican_galera_password }}"
-    priv: "{{ barbican_galera_database_name }}.*:ALL"
-    host: "{{ item }}"
-    state: "present"
-  with_items:
-    - "localhost"
-    - "%"
-  tags:
-    - barbican-database-setup
-    - barbican-db-setup
-    - barbican-setup
-
 - name: Perform a synchronization of the Barbican database
   command: "barbican-db-manage upgrade"
   sudo: yes
