@@ -81,7 +81,7 @@
 - name: Install pip packages for Barbican
   pip:
     name: "{{ item }}"
-    state: "present"
+    state: "latest"
     extra_args: "{{ pip_install_options_fact }}"
   register: install_barbican_pip_packages
   until: install_barbican_pip_packages |success
