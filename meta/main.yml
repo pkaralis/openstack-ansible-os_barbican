@@ -15,12 +15,7 @@ galaxy_info:
   - barbican
 
 dependencies:
-  - role: pip_lock_down
-    when:
-      - not barbican_developer_mode | bool
-  - role: pip_install
-    when:
-      - barbican_developer_mode | bool
+  - pip_install
   - role: apt_package_pinning
     when:
       - ansible_pkg_mgr == 'apt'
