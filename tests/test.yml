@@ -30,3 +30,6 @@
 
 # Install Barbican
 - include: test-install-barbican.yml
+
+# Test Barbican
+- include: test-barbican-functional.yml

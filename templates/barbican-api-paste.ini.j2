@@ -1,7 +1,7 @@
 [composite:main]
 use = egg:Paste#urlmap
 /: barbican_version
-/v1: barbican_api
+/v1: barbican-api-keystone
 
 # Use this pipeline for Barbican API - versions no authentication
 [pipeline:barbican_version]
@@ -46,10 +46,10 @@ audit_map_file = /etc/barbican/api_audit_map.conf
 [filter:keystone_authtoken]
 paste.filter_factory = keystonemiddleware.auth_token:filter_factory
 #need ability to re-auth a token, thus admin url
-identity_uri = http://localhost:35357
-admin_tenant_name = service
-admin_user = barbican
-admin_password = orange
+identity_uri = {{ keystone_service_adminuri }}
+admin_tenant_name = {{ barbican_service_project_name }}
+admin_user = {{ barbican_service_user_name }}
+admin_password = {{ barbican_service_password }}
 auth_version = v3.0
 #delay failing perhaps to log the unauthorized request in barbican ..
 #delay_auth_decision = true
