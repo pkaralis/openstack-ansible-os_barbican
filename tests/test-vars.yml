@@ -47,7 +47,6 @@ openrc_os_password: "{{ keystone_auth_admin_password }}"
 rabbitmq_port: 5671
 rabbitmq_servers: 10.100.100.2
 rabbitmq_use_ssl: true
-verbose: true
 barbican_service_publicurl: "http://10.100.100.4:9311"
 barbican_service_internalurl: "{{ barbican_service_publicurl }}"
 barbican_service_adminurl: "{{ barbican_service_publicurl }}"
