@@ -21,19 +21,6 @@
     - barbican-apt-sources
     - barbican-install
 
-- name: Install apt packages for Barbican
-  apt:
-    pkg: "{{ item }}"
-    state: "latest"
-  register: install_barbican_apt_packages
-  until: install_barbican_apt_packages |success
-  retries: 5
-  delay: 2
-  with_items: barbican_apt_packages
-  tags:
-    - barbican-apt-packages
-    - barbican-install
-
 - name: Create developer mode constraint file
   copy:
     dest: "/opt/developer-pip-constraints.txt"
