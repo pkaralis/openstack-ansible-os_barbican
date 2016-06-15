@@ -44,10 +44,8 @@
 
 - name: Restart Barbican Services
   service:
-    name: "{{ item }}"
+    name: "{{ barbican_uwsgi_program_name }}"
     state: "restarted"
-  with_items:
-    - "{{ barbican_uwsgi_program_name }}"
 
 - name: Flush handlers
   meta: flush_handlers

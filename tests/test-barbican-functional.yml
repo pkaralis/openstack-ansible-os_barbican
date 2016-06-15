@@ -41,7 +41,7 @@
     - name: Register secret location
       set_fact:
         secret_ref: "{{ item.split('|')[2] }}"
-      with_items: barbican_secret_store.stdout_lines
+      with_items: "{{ barbican_secret_store.stdout_lines }}"
       when: item.find('Secret href') != -1
     - name: Retrieve test secret
       shell: |
