@@ -69,7 +69,7 @@
   until: ensure_barbican_roles |success
   retries: 5
   delay: 2
-  with_items: barbican_service_role_names
+  with_items: "{{ barbican_service_role_names }}"
   tags:
     - barbican-api-setup
     - barbican-role-setup

@@ -87,7 +87,7 @@
   until: install_barbican_pip_packages |success
   retries: 5
   delay: 2
-  with_items: barbican_pip_packages
+  with_items: "{{ barbican_pip_packages }}"
   tags:
     - barbican-install
     - barbican-pip-packages
