@@ -43,7 +43,3 @@
       destination: "{{ barbican_etc_directory }}/vassals/barbican-api.ini"
       config_overrides: "{{ barbican_vassals_api_overrides }}"
       config_type: "ini"
-  tags:
-    - barbican-config-files
-    - barbican-configuration
-    - barbican-post-install

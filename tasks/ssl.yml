@@ -17,9 +17,5 @@
   when: >
     barbican_ssl | bool and
     (barbican_user_ssl_cert is not defined or barbican_user_ssl_key is not defined)
-  tags:
-    - barbican-ssl
 
 - include: user-provided-ssl.yml
-  tags:
-    - barbican-ssl

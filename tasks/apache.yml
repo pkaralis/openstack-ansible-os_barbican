@@ -24,8 +24,6 @@
     - { src: "barbican-httpd.conf.j2", dest: "/etc/apache2/sites-available/barbican-httpd.conf" }
   notify:
     - Restart Apache
-  tags:
-    - barbican-httpd
 
 - name: Disable default apache site
   file:
@@ -33,8 +31,6 @@
     state: "absent"
   notify:
     - Restart Apache
-  tags:
-    - barabican-httpd
 
 - name: Enable Barbican vhost
   file:
@@ -45,8 +41,6 @@
     - { src: "/etc/apache2/sites-available/barbican-httpd.conf", dest: "/etc/apache2/sites-enabled/barbican-httpd.conf", state: "link" }
   notify:
     - Restart Apache
-  tags:
-    - barbican-httpd
 
 - name: Ensure Apache ServerName
   lineinfile:
@@ -54,8 +48,6 @@
     line: "ServerName {{ inventory_hostname }}"
   notify:
     - Restart Apache
-  tags:
-    - barbican-httpd
 
 - name: Ensure Apache ServerTokens
   lineinfile:
@@ -64,8 +56,6 @@
     line: "ServerTokens {{ barbican_apache_servertokens }}"
   notify:
     - Restart Apache
-  tags:
-    - barbican-httpd
 
 - name: Ensure Apache ServerSignature
   lineinfile:
@@ -74,8 +64,6 @@
     line: "ServerSignature {{ barbican_apache_serversignature }}"
   notify:
     - Restart Apache
-  tags:
-    - barbican-httpd
 
 - name: Enable/disable mod_ssl for apache2
   apache2_module:
@@ -83,6 +71,3 @@
     state: "{{ (barbican_ssl | bool) | ternary('present', 'absent') }}"
   notify:
     - Restart Apache
-  tags:
-    - barbican-httpd
-    - barbican-ssl

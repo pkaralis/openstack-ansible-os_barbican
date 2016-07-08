@@ -18,8 +18,6 @@
     dest: "{{ barbican_ssl_cert }}"
     state: "absent"
   when: barbican_ssl_self_signed_regen | bool
-  tags:
-    - barbican-ssl
 
 - name: Create self-signed Apache ssl cert
   command: >
@@ -31,6 +29,3 @@
     -extensions v3_ca
     creates={{ barbican_ssl_cert }}
   notify: Restart Apache
-  tags:
-    - barbican-configs
-    - barbican-ssl

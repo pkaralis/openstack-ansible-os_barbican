@@ -18,9 +18,6 @@
     name: "{{ barbican_system_group_name }}"
     state: "present"
     system: "yes"
-  tags:
-    - barbican-group
-    - barbican-system-settings
 
 - name: Create the Barbican system user
   user:
@@ -31,9 +28,6 @@
     system: "yes"
     createhome: "yes"
     home: "{{ barbican_system_user_home }}"
-  tags:
-    - barbican-user
-    - barbican-system-settings
 
 - name: Create Barbican's directories
   file:
@@ -46,9 +40,6 @@
     - path: "/etc/barbican"
     - path: "/etc/barbican/vassals"
     - path: "{{ barbican_system_user_home }}"
-  tags:
-    - barbican-directories
-    - barbican-system-settings
 
 - name: Test for Barbican log directory or link
   shell: |
@@ -61,10 +52,6 @@
   register: log_dir
   failed_when: false
   changed_when: log_dir.rc != 0
-  tags:
-    - barbican-directories
-    - barbican-logs
-    - barbican-system-settings
 
 - name: Create Barbican log directory
   file:
@@ -74,7 +61,3 @@
     group: "{{ barbican_system_group_name }}"
     mode: "0750"
   when: log_dir.rc != 0
-  tags:
-    - barbican-directories
-    - barbican-logs
-    - barbican-system-settings

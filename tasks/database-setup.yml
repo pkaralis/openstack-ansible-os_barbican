@@ -17,9 +17,3 @@
   command: "barbican-db-manage upgrade"
   become: yes
   become_user: "{{ barbican_system_user_name }}"
-  tags:
-    - barbican-database-setup
-    - barbican-db-setup
-    - barbican-database-sync
-    - barbican-db-sync
-    - barbican-setup

@@ -43,3 +43,13 @@ Example Playbook
        keystone_admin_user_name: admin
        keystone_auth_admin_password: SuperSecretePassword4
        keystone_admin_tenant_name: admin
+
+Tags
+====
+
+This role supports two tags: ``barbican-install`` and ``barbican-config``
+
+The ``barbican-install`` tag can be used to install and upgrade.
+
+The ``barbican-config`` tag can be used to maintain configuration of the
+service.

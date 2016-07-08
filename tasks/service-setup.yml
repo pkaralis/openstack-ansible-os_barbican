@@ -28,10 +28,6 @@
   until: add_barbican_service |success
   retries: 5
   delay: 2
-  tags:
-    - barbican-api-setup
-    - barbican-service-add
-    - barbican-setup
 
 - name: Ensure the Barbican user exists
   keystone:
@@ -48,11 +44,6 @@
   until: add_barbican_user |success
   retries: 5
   delay: 2
-  tags:
-    - barbican-api-setup
-    - barbican-service-add
-    - barbican-user-add
-    - barbican-setup
 
 - name: Ensure the Barbican user has the admin role
   keystone:
@@ -70,10 +61,6 @@
   retries: 5
   delay: 2
   with_items: "{{ barbican_service_role_names }}"
-  tags:
-    - barbican-api-setup
-    - barbican-role-setup
-    - barbican-setup
 
 - name: Ensure the Barbican endpoint is registered
   keystone:
@@ -97,8 +84,3 @@
   until: add_barbican_endpoints |success
   retries: 5
   delay: 2
-  tags:
-    - barbican-api-setup
-    - barbican-service-add
-    - barbican-endpoints-add
-    - barbican-setup

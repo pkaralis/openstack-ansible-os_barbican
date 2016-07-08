@@ -27,20 +27,34 @@
     - always
 
 - include: pre-install.yml
+  tags:
+    - barbican-install
 
 - include: install.yml
+  tags:
+    - barbican-install
 
 - include: post-install.yml
+  tags:
+    - barbican-install
+    - barbican-config
 
 - include: upstart-init.yml
+  tags:
+    - barbican-install
+    - barbican-config
 
 - include: database-setup.yml
   when: >
     inventory_hostname == groups['barbican_all'][0]
+  tags:
+    - barbican-install
 
 - include: service-setup.yml
   when: >
     inventory_hostname == groups['barbican_all'][0]
+  tags:
+    - barbican-install
 
 - name: Restart Barbican Services
   service:

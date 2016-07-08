@@ -16,10 +16,6 @@
 - include: barbican_install_apt.yml
   when:
     - ansible_pkg_mgr == 'apt'
-  tags:
-    - barbican-apt-packages
-    - barbican-apt-sources
-    - barbican-install
 
 - name: Create developer mode constraint file
   copy:
@@ -30,9 +26,6 @@
       {% endfor %}
   when:
     - barbican_developer_mode | bool
-  tags:
-    - barbican-install
-    - barbican-pip-packages
 
 - name: Clone requirements git repository
   git:
@@ -43,27 +36,18 @@
     version: "{{ barbican_requirements_git_install_branch }}"
   when:
     - barbican_developer_mode | bool
-  tags:
-    - barbican-install
-    - barbican-pip-packages
 
 - name: Add constraints to pip_install_options fact for developer mode
   set_fact:
     pip_install_options_fact: "{{ pip_install_options|default('') }} --constraint /opt/developer-pip-constraints.txt --constraint /opt/requirements/upper-constraints.txt"
   when:
     - barbican_developer_mode | bool
-  tags:
-    - barbican-install
-    - barbican-pip-packages
 
 - name: Set pip_install_options_fact when not in developer mode
   set_fact:
     pip_install_options_fact: "{{ pip_install_options|default('') }}"
   when:
     - not barbican_developer_mode | bool
-  tags:
-    - barbican-install
-    - barbican-pip-packages
 
 - name: Install pip packages for Barbican
   pip:
@@ -75,6 +59,3 @@
   retries: 5
   delay: 2
   with_items: "{{ barbican_pip_packages }}"
-  tags:
-    - barbican-install
-    - barbican-pip-packages

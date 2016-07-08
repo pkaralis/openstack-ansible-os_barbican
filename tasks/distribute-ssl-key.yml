@@ -30,6 +30,3 @@
   retries: 5
   delay: 2
   notify: Restart Apache
-  tags:
-    - barbican-config
-    - barbican-ssl
