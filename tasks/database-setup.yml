@@ -15,8 +15,8 @@
 
 - name: Perform a synchronization of the Barbican database
   command: "barbican-db-manage upgrade"
-  sudo: yes
-  sudo_user: "{{ barbican_system_user_name }}"
+  become: yes
+  become_user: "{{ barbican_system_user_name }}"
   tags:
     - barbican-database-setup
     - barbican-db-setup
