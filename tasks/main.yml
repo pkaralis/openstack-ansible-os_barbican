@@ -56,10 +56,5 @@
   tags:
     - barbican-install
 
-- name: Restart Barbican Services
-  service:
-    name: "{{ barbican_uwsgi_program_name }}"
-    state: "restarted"
-
 - name: Flush handlers
   meta: flush_handlers

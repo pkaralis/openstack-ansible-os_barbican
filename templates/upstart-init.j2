@@ -12,7 +12,7 @@ respawn
 respawn limit 10 5
 
 # Set the RUNBIN environment variable
-env RUNBIN="/usr/local/bin/{{ program_name }}"
+env RUNBIN="{{ barbican_bin }}/{{ program_name }}"
 
 # Change directory to service users home
 chdir "{{ service_home }}"

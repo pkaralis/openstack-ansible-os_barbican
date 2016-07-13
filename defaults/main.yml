@@ -63,6 +63,12 @@ barbican_developer_mode: false
 barbican_developer_constraints:
   - "git+{{ barbican_git_repo }}@{{ barbican_git_install_branch }}#egg=barbican"
 
+# Name of the virtual env to deploy into
+barbican_venv_tag: untagged
+barbican_bin: "/openstack/venvs/barbican-{{ barbican_venv_tag }}/bin"
+
+barbican_venv_download_url: http://127.0.0.1/venvs/untagged/ubuntu/barbican.tgz
+
 # Database vars
 barbican_galera_database: barbican
 barbican_galera_user: barbican
@@ -102,6 +108,11 @@ barbican_ssl_self_signed_subject: "/C=US/ST=Texas/L=San Antonio/O=IT/CN={{ inter
 #barbican_user_ssl_cert: <path to cert on ansible deployment host>
 #barbican_user_ssl_key: <path to cert on ansible deployment host>
 #barbican_user_ssl_ca_cert: <path to cert on ansible deployment host>
+
+barbican_requires_pip_packages:
+  - virtualenv
+  - virtualenv-tools
+  - python-keystoneclient # Keystoneclient needed by OSA keystone lib
 
 barbican_pip_packages:
   - alembic

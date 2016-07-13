@@ -22,3 +22,8 @@
   until: apache_restart|success
   retries: 5
   delay: 2
+
+- name: Restart barbican services
+  service:
+    name: "{{ barbican_uwsgi_program_name }}"
+    state: "restarted"
