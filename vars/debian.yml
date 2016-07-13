@@ -1,5 +1,4 @@
----
-# Copyright 2016, Ian Cordasco
+# Copyright 2016, Intel Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- include: upstart-common-init.yml
-  vars:
-    program_name: "{{ barbican_uwsgi_program_name }}"
-    program_config_options: "{{ barbican_uwsgi_options }}"
-    service_name: "{{ barbican_service_name }}"
-    system_user: "{{ barbican_system_user_name }}"
-    system_group: "{{ barbican_system_group_name }}"
-    service_home: "{{ barbican_system_user_home }}"
-    log_directory: "{{ barbican_log_directory }}"
+barbican_apt_packages:
+  - apache2
+  - apache2-utils
+  - libapache2-mod-wsgi
+  - python-dev
+  - libssl-dev
+  - libpq-dev
+  - git
+  - libffi-dev
+  - gettext
+  - build-essential
