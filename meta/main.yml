@@ -5,14 +5,15 @@ galaxy_info:
   license: Apache-2.0
   min_ansible_version: 1.9
   platforms:
-  - name: Ubuntu
-    versions:
-    - trusty
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
   galaxy_tags:
-  - cloud
-  - openstack
-  - python
-  - barbican
+    - cloud
+    - openstack
+    - python
+    - barbican
 
 dependencies:
   - pip_install
@@ -20,3 +21,4 @@ dependencies:
     when:
       - ansible_pkg_mgr == 'apt'
   - galera_client
+

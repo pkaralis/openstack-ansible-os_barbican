@@ -1,4 +1,5 @@
-# Copyright 2016, Intel Corporation.
+---
+# Copyright 2016, Comcast Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-barbican_apt_packages:
-  - apache2
-  - apache2-utils
-  - libapache2-mod-wsgi
-  - python-dev
-  - libssl-dev
-  # - libxml2-dev
-  # - libmysqlclient-dev
-  # - libxslt-dev
-  - libpq-dev
-  - git
-  - libffi-dev
-  - gettext
-  - build-essential
+- include: init_upstart.yml
+  when: pid1_name == "init"
+
+- include: init_systemd.yml
+  when: pid1_name == "systemd"
+
+- name: Load service
+  service:
+   name: "{{ program_name }}"
+   enabled: "yes"
+  notify:
+    - Restart barbican services
