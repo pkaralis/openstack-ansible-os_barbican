@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Set the package install state for distribution packages
+# Options are 'present' and 'latest'
+barbican_package_state: "latest"
+
 barbican_system_group_name: barbican
 barbican_system_user_name: barbican
 barbican_system_user_comment: Barbican System User

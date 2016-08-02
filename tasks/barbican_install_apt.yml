@@ -24,7 +24,7 @@
 - name: Install apt packages for Barbican
   apt:
     pkg: "{{ item }}"
-    state: "latest"
+    state: "{{ barbican_package_state }}"
   register: install_barbican_apt_packages
   until: install_barbican_apt_packages |success
   retries: 5
