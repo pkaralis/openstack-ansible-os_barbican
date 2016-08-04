@@ -152,3 +152,9 @@ barbican_pip_packages:
   - uwsgi
   - webob
   - barbican
+
+# This variable is used by the repo_build process to determine
+# which host group to check for members of before building the
+# pip packages required by this role. The value is picked up
+# by the py_pkgs lookup.
+barbican_role_project_group: barbican_all
