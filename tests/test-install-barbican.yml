@@ -22,11 +22,8 @@
       rabbitmq_vhost:
         name: "{{ barbican_rabbitmq_vhost }}"
         state: "present"
-      delegate_to: "10.100.100.2"
+      delegate_to: "{{ hostvars[groups['rabbitmq_all'][0]]['ansible_host'] }}"
       when: inventory_hostname == groups['barbican_all'][0]
-      tags:
-        - barbican-rabbitmq
-        - barbican-rabbitmq-vhost
     - name: Ensure rabbitmq user
       rabbitmq_user:
         user: "{{ barbican_rabbitmq_userid }}"
@@ -36,11 +33,8 @@
         read_priv: ".*"
         write_priv: ".*"
         state: "present"
-      delegate_to: "10.100.100.2"
+      delegate_to: "{{ hostvars[groups['rabbitmq_all'][0]]['ansible_host'] }}"
       when: inventory_hostname == groups['barbican_all'][0]
-      tags:
-        - barbican-rabbitmq
-        - barbican-rabbitmq-user
     - name: Create DB for service
       mysql_db:
         login_user: "root"
@@ -48,10 +42,8 @@
         login_host: "localhost"
         name: "{{ barbican_galera_database }}"
         state: "present"
-      delegate_to: "10.100.100.2"
+      delegate_to: "{{ hostvars[groups['galera_all'][0]]['ansible_host'] }}"
       when: inventory_hostname == groups['barbican_all'][0]
-      tags:
-        - mysql-db-setup
     - name: Grant access to the DB for the service
       mysql_user:
         login_user: "root"
@@ -65,11 +57,10 @@
       with_items:
         - "localhost"
         - "%"
-      delegate_to: "10.100.100.2"
+      delegate_to: "{{ hostvars[groups['galera_all'][0]]['ansible_host'] }}"
       when: inventory_hostname == groups['barbican_all'][0]
-      tags:
-        - mysql-db-setup
   roles:
     - role: "{{ rolename | basename }}"
   vars_files:
+    - playbooks/test-vars.yml
     - test-vars.yml

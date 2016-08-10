@@ -52,4 +52,5 @@
       assert:
         that: barbican_secret_store.stdout.find('secrete') != -1
   vars_files:
+    - playbooks/test-vars.yml
     - test-vars.yml
