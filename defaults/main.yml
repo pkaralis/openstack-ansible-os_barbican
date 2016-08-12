@@ -95,8 +95,6 @@ barbican_apache_log_level: info
 barbican_apache_servertokens: "Prod"
 barbican_apache_serversignature: "Off"
 
-keystone_wsgi_processes: "{{ ansible_processor_vcpus | default (1) * 2 }}"
-
 barbican_ssl: false
 barbican_ssl_cert: /etc/ssl/certs/barbican.pem
 barbican_ssl_key: /etc/ssl/private/barbican.key
