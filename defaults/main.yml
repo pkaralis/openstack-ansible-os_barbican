@@ -17,6 +17,7 @@
 # Options are 'present' and 'latest'
 barbican_package_state: "latest"
 
+## System info
 barbican_system_group_name: barbican
 barbican_system_user_name: barbican
 barbican_system_user_comment: Barbican System User
@@ -26,6 +27,7 @@ barbican_log_directory: /var/log/barbican
 barbican_etc_directory: /etc/barbican
 barbican_vassals_directory: "{{ barbican_etc_directory }}/vassals"
 
+#Aodh services info
 barbican_api_program_name: barbican-api
 barbican_keystone_listener_program_name: barbican-keystone-listener
 barbican_worker_program_name: barbican-worker
@@ -33,6 +35,7 @@ barbican_retry_program_name: barbican-retry
 barbican_uwsgi_program_name: uwsgi
 barbican_uwsgi_options: "--master --die-on-term --emperor {{ barbican_vassals_directory }}"
 
+## Service Type and Data
 barbican_service_name: barbican
 barbican_service_user_name: barbican
 barbican_service_type: key-manager
@@ -56,14 +59,20 @@ barbican_paste_overrides: {}
 barbican_api_audit_map_overrides: {}
 barbican_vassals_api_overrides: {}
 
+## Toggle developer mode
+barbican_developer_mode: false
+
+## The git source/branch
 barbican_git_repo: "https://git.openstack.org/openstack/barbican"
 barbican_git_install_branch: master
+
 barbican_git_dest: "/opt/barbican_{{ barbican_git_install_branch |replace('/', '_') }}"
 
+## The git source/branch for the upper-constraints (used in developer mode)
 barbican_requirements_git_repo: https://git.openstack.org/openstack/requirements
 barbican_requirements_git_install_branch: master
 
-barbican_developer_mode: false
+## The packages to build from source (used in developer mode)
 barbican_developer_constraints:
   - "git+{{ barbican_git_repo }}@{{ barbican_git_install_branch }}#egg=barbican"
 
@@ -71,6 +80,7 @@ barbican_developer_constraints:
 barbican_venv_tag: untagged
 barbican_bin: "/openstack/venvs/barbican-{{ barbican_venv_tag }}/bin"
 
+# URL of the pre-built virtualenv
 barbican_venv_download_url: http://127.0.0.1/venvs/untagged/ubuntu/barbican.tgz
 
 # Database vars
@@ -113,11 +123,13 @@ barbican_ssl_self_signed_subject: "/C=US/ST=Texas/L=San Antonio/O=IT/CN={{ inter
 #barbican_user_ssl_key: <path to cert on ansible deployment host>
 #barbican_user_ssl_ca_cert: <path to cert on ansible deployment host>
 
+# packages required to execute the role
 barbican_requires_pip_packages:
   - virtualenv
   - virtualenv-tools
   - python-keystoneclient # Keystoneclient needed by OSA keystone lib
 
+# packages required to run the barbican service
 barbican_pip_packages:
   - alembic
   - Babel
