@@ -1,7 +1,5 @@
 OpenStack-Ansible Barbican
 ##########################
-:tags: openstack, barbican, cloud, ansible
-:category: \*nix
 
 Contributor Guidelines
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -74,7 +72,7 @@ Importance:
 Style guide
 -----------
 
-When creating tasks and other roles for use in Ansible please create then
+When creating tasks and other roles for use in Ansible please create them
 using the YAML dictionary format.
 
 Example YAML dictionary format:
