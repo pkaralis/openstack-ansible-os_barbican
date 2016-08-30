@@ -25,8 +25,8 @@
   apt:
     pkg: "{{ item }}"
     state: "{{ barbican_package_state }}"
-  register: install_barbican_apt_packages
-  until: install_barbican_apt_packages |success
+  register: install_barbican_distro_packages
+  until: install_barbican_distro_packages |success
   retries: 5
   delay: 2
-  with_items: "{{ barbican_apt_packages }}"
+  with_items: "{{ barbican_distro_packages }}"
