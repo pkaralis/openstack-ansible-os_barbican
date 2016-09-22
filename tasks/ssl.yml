@@ -14,8 +14,9 @@
 # limitations under the License.
 
 - include: self-signed-ssl.yml
-  when: >
-    barbican_ssl | bool and
-    (barbican_user_ssl_cert is not defined or barbican_user_ssl_key is not defined)
+  static: no
+  when:
+    - barbican_ssl | bool
+    - barbican_user_ssl_cert is not defined or barbican_user_ssl_key is not defined
 
 - include: user-provided-ssl.yml
