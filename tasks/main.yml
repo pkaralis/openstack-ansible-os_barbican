@@ -57,13 +57,11 @@
     - barbican-config
 
 - include: database-setup.yml
-  static: no
   when: inventory_hostname == groups['barbican_all'][0]
   tags:
     - barbican-install
 
 - include: service-setup.yml
-  static: no
   when: inventory_hostname == groups['barbican_all'][0]
   tags:
     - barbican-install

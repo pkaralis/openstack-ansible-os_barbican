@@ -14,13 +14,10 @@
 # limitations under the License.
 
 - include: create-ssl-key.yml
-  static: no
   when: inventory_hostname == groups['barbican_all'][0]
 
 - include: store-ssl-key.yml
-  static: no
   when: inventory_hostname == groups['barbican_all'][0]
 
 - include: distribute-ssl-key.yml
-  static: no
   when: inventory_hostname != groups['barbican_all'][0]
