@@ -14,6 +14,6 @@
 # limitations under the License.
 
 - name: Perform a synchronization of the Barbican database
-  command: "{{ barbican_bin }}/barbican-db-manage upgrade"
+  command: "{{ barbican_bin }}/barbican-manage db upgrade"
   become: yes
   become_user: "{{ barbican_system_user_name }}"
