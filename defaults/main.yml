@@ -20,6 +20,9 @@ debug: False
 # Options are 'present' and 'latest'
 barbican_package_state: "latest"
 
+# Toggle keystone authentication for barbican
+barbican_keystone_auth: no
+
 ## System info
 barbican_system_group_name: barbican
 barbican_system_user_name: barbican
@@ -97,8 +100,8 @@ barbican_rabbitmq_vhost: /barbican
 
 # Keystone AuthToken/Middleware
 barbican_keystone_auth_plugin: password
-barbican_service_project_domain_name: Default
-barbican_service_user_domain_name: default
+barbican_service_project_domain_id: default
+barbican_service_user_domain_id: default
 barbican_service_project_name: service
 
 # Apache configuration vars
@@ -155,6 +158,7 @@ barbican_pip_packages:
   - pecan
   - pycadf
   - pycrypto
+  - python-memcached
   - PyMySQL
   - pyOpenSSL
   - ldap3
