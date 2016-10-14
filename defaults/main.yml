@@ -135,40 +135,10 @@ barbican_requires_pip_packages:
 
 # packages required to run the barbican service
 barbican_pip_packages:
-  - alembic
-  - Babel
-  - cffi
-  - cryptography
-  - eventlet
-  - jsonschema
-  - oslo.concurrency
-  - oslo.config
-  - oslo.context
-  - oslo.i18n
-  - oslo.messaging
-  - oslo.middleware
-  - oslo.log
-  - oslo.policy
-  - oslo.serialization
-  - oslo.service
-  - oslo.utils
-  - Paste
-  - PasteDeploy
-  - pbr
-  - pecan
-  - pycadf
-  - pycrypto
-  - python-memcached
-  - PyMySQL
-  - pyOpenSSL
-  - ldap3
-  - keystonemiddleware
-  - six
-  - SQLAlchemy
-  - stevedore
-  - uwsgi
-  - webob
   - barbican
+  - PyMySQL
+  - python-memcached
+  - uwsgi
 
 # This variable is used by the repo_build process to determine
 # which host group to check for members of before building the
