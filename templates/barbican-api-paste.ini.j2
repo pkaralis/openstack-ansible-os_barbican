@@ -1,7 +1,7 @@
 [composite:main]
 use = egg:Paste#urlmap
 /: barbican_version
-/v1: barbican-api-keystone
+/v1: {{ (barbican_keystone_auth | bool) | ternary('barbican-api-keystone', 'barbican_api') }}
 
 # Use this pipeline for Barbican API - versions no authentication
 [pipeline:barbican_version]
@@ -18,11 +18,11 @@ pipeline = cors unauthenticated-context egg:Paste#cgitb egg:Paste#httpexceptions
 
 #Use this pipeline for keystone auth
 [pipeline:barbican-api-keystone]
-pipeline = cors keystone_authtoken context apiapp
+pipeline = cors authtoken context apiapp
 
 #Use this pipeline for keystone auth with audit feature
 [pipeline:barbican-api-keystone-audit]
-pipeline = keystone_authtoken context audit apiapp
+pipeline = authtoken context audit apiapp
 
 [app:apiapp]
 paste.app_factory = barbican.api.app:create_main_app
@@ -43,21 +43,8 @@ paste.filter_factory = barbican.api.middleware.context:ContextMiddleware.factory
 paste.filter_factory = keystonemiddleware.audit:filter_factory
 audit_map_file = /etc/barbican/api_audit_map.conf
 
-[filter:keystone_authtoken]
+[filter:authtoken]
 paste.filter_factory = keystonemiddleware.auth_token:filter_factory
-#need ability to re-auth a token, thus admin url
-identity_uri = {{ keystone_service_adminuri }}
-admin_tenant_name = {{ barbican_service_project_name }}
-admin_user = {{ barbican_service_user_name }}
-admin_password = {{ barbican_service_password }}
-auth_version = v3.0
-#delay failing perhaps to log the unauthorized request in barbican ..
-#delay_auth_decision = true
-# signing_dir is configurable, but the default behavior of the authtoken
-# middleware should be sufficient.  It will create a temporary directory
-# for the user the barbican process is running as.
-#signing_dir = /var/barbican/keystone-signing
-
 
 [filter:profile]
 use = egg:repoze.profile
