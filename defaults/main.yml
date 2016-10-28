@@ -46,7 +46,6 @@ barbican_service_name: barbican
 barbican_service_user_name: barbican
 barbican_service_type: key-manager
 barbican_service_description: "OpenStack Key and Secrets Management (Barbican)"
-barbican_service_project_name: service
 barbican_service_role_names:
   - admin
 barbican_service_region: RegionOne
