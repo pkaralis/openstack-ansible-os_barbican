@@ -51,12 +51,13 @@ barbican_service_role_names:
 barbican_service_region: RegionOne
 barbican_service_host: "0.0.0.0"
 barbican_service_port: 9311
-barbican_service_publicuri_protocol: http
-barbican_service_publicurl: "{{ barbican_service_publicuri_protocol }}://{{ external_lb_vip_address }}:{{ barbican_service_port }}"
-barbican_service_internaluri_protocol: http
-barbican_service_internalurl: "{{ barbican_service_internaluri_protocol }}://{{ internal_lb_vip_address }}:{{ barbican_service_port }}"
-barbican_service_adminuri_protocol: http
-barbican_service_adminurl: "{{ barbican_service_adminuri_protocol }}://{{ internal_lb_vip_address }}:{{ barbican_service_port }}"
+barbican_service_proto: http
+barbican_service_publicuri_proto: "{{ openstack_service_publicuri_proto | default(barbican_service_proto) }}"
+barbican_service_adminuri_proto: "{{ openstack_service_adminuri_proto | default(barbican_service_proto) }}"
+barbican_service_internaluri_proto: "{{ openstack_service_internaluri_proto | default(barbican_service_proto) }}"
+barbican_service_publicurl: "{{ barbican_service_publicuri_proto }}://{{ external_lb_vip_address }}:{{ barbican_service_port }}"
+barbican_service_internalurl: "{{ barbican_service_internaluri_proto }}://{{ internal_lb_vip_address }}:{{ barbican_service_port }}"
+barbican_service_adminurl: "{{ barbican_service_adminuri_proto }}://{{ internal_lb_vip_address }}:{{ barbican_service_port }}"
 
 barbican_config_overrides: {}
 barbican_policy_overrides: {}
