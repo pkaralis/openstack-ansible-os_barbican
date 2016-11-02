@@ -71,12 +71,7 @@ barbican_developer_mode: false
 ## The git source/branch
 barbican_git_repo: "https://git.openstack.org/openstack/barbican"
 barbican_git_install_branch: master
-
 barbican_git_dest: "/opt/barbican_{{ barbican_git_install_branch |replace('/', '_') }}"
-
-## The git source/branch for the upper-constraints (used in developer mode)
-barbican_requirements_git_repo: https://git.openstack.org/openstack/requirements
-barbican_requirements_git_install_branch: master
 
 ## The packages to build from source (used in developer mode)
 barbican_developer_constraints:
