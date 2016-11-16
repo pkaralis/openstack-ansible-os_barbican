@@ -90,7 +90,7 @@
 
 - name: Update virtualenv path
   command: >
-    virtualenv-tools --update-path=auto {{ barbican_bin | dirname }}
+    virtualenv-tools --update-path=auto --reinitialize {{ barbican_bin | dirname }}
   when:
     - not barbican_developer_mode | bool
     - barbican_get_venv | changed or barbican_venv_dir | changed
