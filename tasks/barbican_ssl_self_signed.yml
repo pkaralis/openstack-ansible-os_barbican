@@ -13,10 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- include: self-signed-ssl.yml
-  static: no
-  when:
-    - barbican_ssl | bool
-    - barbican_user_ssl_cert is not defined or barbican_user_ssl_key is not defined
+- include: barbican_ssl_key_create.yml
+  when: inventory_hostname == groups['barbican_all'][0]
 
-- include: user-provided-ssl.yml
+- include: barbican_ssl_key_store.yml
+  when: inventory_hostname == groups['barbican_all'][0]
+
+- include: barbican_ssl_key_distribute.yml
+  when: inventory_hostname != groups['barbican_all'][0]

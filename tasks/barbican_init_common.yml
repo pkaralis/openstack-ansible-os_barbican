@@ -1,5 +1,5 @@
 ---
-# Copyright 2015, Rackspace US, Inc.
+# Copyright 2016, Comcast Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- include: create-ssl-key.yml
-  when: inventory_hostname == groups['barbican_all'][0]
+- include: barbican_init_upstart.yml
+  static: no
+  when:
+    - ansible_service_mgr == 'upstart'
 
-- include: store-ssl-key.yml
-  when: inventory_hostname == groups['barbican_all'][0]
+- include: barbican_init_systemd.yml
+  static: no
+  when:
+    - ansible_service_mgr == 'systemd'
 
-- include: distribute-ssl-key.yml
-  when: inventory_hostname != groups['barbican_all'][0]
+- name: Load service
+  service:
+   name: "{{ program_name }}"
+   enabled: "yes"
+  notify:
+    - Restart barbican services

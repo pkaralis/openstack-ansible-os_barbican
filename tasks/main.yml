@@ -26,30 +26,30 @@
   tags:
     - always
 
-- include: pre-install.yml
+- include: barbican_pre_install.yml
   tags:
     - barbican-install
 
-- include: install.yml
+- include: barbican_install.yml
   tags:
     - barbican-install
 
-- include: post-install.yml
-  tags:
-    - barbican-install
-    - barbican-config
-
-- include: init.yml
+- include: barbican_post_install.yml
   tags:
     - barbican-install
     - barbican-config
 
-- include: database-setup.yml
+- include: barbican_init.yml
+  tags:
+    - barbican-install
+    - barbican-config
+
+- include: barbican_db_setup.yml
   when: inventory_hostname == groups['barbican_all'][0]
   tags:
     - barbican-install
 
-- include: service-setup.yml
+- include: barbican_service_setup.yml
   when: inventory_hostname == groups['barbican_all'][0]
   tags:
     - barbican-install

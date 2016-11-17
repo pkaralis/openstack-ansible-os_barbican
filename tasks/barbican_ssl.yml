@@ -1,5 +1,5 @@
 ---
-# Copyright 2016, Comcast Corporation.
+# Copyright 2015, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,19 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- include: init_upstart.yml
+- include: barbican_ssl_self_signed.yml
   static: no
   when:
-    - ansible_service_mgr == 'upstart'
+    - barbican_ssl | bool
+    - barbican_user_ssl_cert is not defined or barbican_user_ssl_key is not defined
 
-- include: init_systemd.yml
-  static: no
-  when:
-    - ansible_service_mgr == 'systemd'
-
-- name: Load service
-  service:
-   name: "{{ program_name }}"
-   enabled: "yes"
-  notify:
-    - Restart barbican services
+- include: barbican_ssl_user_provided.yml
