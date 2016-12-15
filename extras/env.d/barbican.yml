@@ -13,4 +13,4 @@ container_skel:
       - barbican_api
     properties:
       service_name: barbican
-      container_release: trusty
+      container_release: xenial
