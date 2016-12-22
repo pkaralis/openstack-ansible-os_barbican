@@ -4,6 +4,9 @@ Barbican role for OpenStack-Ansible
 
 This Ansible role installs and configures OpenStack barbican.
 
+To clone or view the source code for this repository, visit the role repository
+for `os_barbican <https://github.com/openstack/openstack-ansible-os_barbican>`_.
+
 Default variables
 ~~~~~~~~~~~~~~~~~
 
