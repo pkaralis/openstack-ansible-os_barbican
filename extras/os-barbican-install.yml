@@ -163,7 +163,6 @@
           insecure: "{{ keystone_service_internaluri_insecure |bool }}"
           version: v3
           #auth_type: "{{ barbican_keystone_auth_plugin }}"
-          #signing_dir: "{{ barbican_system_user_home }}/cache/api"
           #auth_url: "{{ keystone_service_internaluri_v3 }}"
           #auth_uri: "{{ keystone_service_internaluri_v3 }}"
           project_domain_name: "{{ barbican_service_project_domain_name }}"
@@ -174,7 +173,6 @@
           password: "{{ barbican_service_password }}"
           #memcached_servers: "{{ memcached_servers }}"
           #token_cache_time: 300
-          #revocation_cache_time: 60
       tags:
         - "os-barbican"
     - { role: "openstack_openrc", tags: [ "openstack-openrc" ] }
