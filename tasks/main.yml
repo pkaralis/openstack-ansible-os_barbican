@@ -36,23 +36,21 @@
 
 - include: barbican_post_install.yml
   tags:
-    - barbican-install
     - barbican-config
 
 - include: barbican_init.yml
   tags:
-    - barbican-install
     - barbican-config
 
 - include: barbican_db_setup.yml
   when: inventory_hostname == groups['barbican_all'][0]
   tags:
-    - barbican-install
+    - barbican-config
 
 - include: barbican_service_setup.yml
   when: inventory_hostname == groups['barbican_all'][0]
   tags:
-    - barbican-install
+    - barbican-config
 
 - name: Flush handlers
   meta: flush_handlers
