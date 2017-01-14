@@ -45,7 +45,7 @@
     dest: "/var/cache/{{ barbican_venv_download_url | basename }}"
     checksum: "sha1:{{ lookup('url', barbican_venv_download_url | replace('tgz', 'checksum')) }}"
   register: barbican_get_venv
-  when: not barbican_developer_mode | bool
+  when: barbican_venv_download | bool
 
 - name: Remove existing venv
   file:
@@ -58,17 +58,14 @@
     path: "{{ barbican_bin | dirname }}"
     state: directory
   register: barbican_venv_dir
-  when:
-    - not barbican_developer_mode | bool
+  when: barbican_get_venv | changed
 
 - name: Unarchive pre-built venv
   unarchive:
     src: "/var/cache/{{ barbican_venv_download_url | basename }}"
     dest: "{{ barbican_bin | dirname }}"
     copy: "no"
-  when:
-    - not barbican_developer_mode | bool
-    - barbican_get_venv | changed or barbican_venv_dir | changed
+  when: barbican_get_venv | changed
   notify: Restart barbican services
 
 - name: Install pip packages
@@ -85,12 +82,10 @@
   until: install_packages|success
   retries: 5
   delay: 2
-  when: barbican_developer_mode | bool
+  when: barbican_get_venv | failed or barbican_get_venv | skipped
   notify: Restart barbican services
 
 - name: Update virtualenv path
   command: >
     virtualenv-tools --update-path=auto --reinitialize {{ barbican_bin | dirname }}
-  when:
-    - not barbican_developer_mode | bool
-    - barbican_get_venv | changed or barbican_venv_dir | changed
+  when: barbican_get_venv | changed

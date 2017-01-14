@@ -82,6 +82,9 @@ barbican_developer_constraints:
 barbican_venv_tag: untagged
 barbican_bin: "/openstack/venvs/barbican-{{ barbican_venv_tag }}/bin"
 
+# venv_download, even when true, will use the fallback method of building the
+# venv from scratch if the venv download fails.
+barbican_venv_download: "{{ not barbican_developer_mode | bool }}"
 # URL of the pre-built virtualenv
 barbican_venv_download_url: http://127.0.0.1/venvs/untagged/ubuntu/barbican.tgz
 
