@@ -44,10 +44,5 @@
     mode: "0644"
     owner: "root"
     group: "root"
-  register: systemd_init
-
-- name: Reload the systemd daemon
-  command: "systemctl daemon-reload"
-  when: systemd_init | changed
   notify:
     - Restart barbican services
