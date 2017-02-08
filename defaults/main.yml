@@ -71,7 +71,7 @@ barbican_developer_mode: false
 
 ## The git source/branch
 barbican_git_repo: "https://git.openstack.org/openstack/barbican"
-barbican_git_install_branch: master
+barbican_git_install_branch: stable/ocata
 barbican_git_dest: "/opt/barbican_{{ barbican_git_install_branch |replace('/', '_') }}"
 
 ## The packages to build from source (used in developer mode)
