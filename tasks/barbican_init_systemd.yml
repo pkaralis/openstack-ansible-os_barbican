@@ -38,11 +38,13 @@
     group: "root"
 
 - name: Place the systemd init script
-  template:
+  config_template:
     src: "barbican-systemd-init.j2"
     dest: "/etc/systemd/system/{{ program_name }}.service"
     mode: "0644"
     owner: "root"
     group: "root"
+    config_overrides: "{{ barbican_uwsgi_init_overrides }}"
+    config_type: "ini"
   notify:
     - Restart barbican services
