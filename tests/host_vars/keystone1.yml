@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-bridges:
-  - "br-mgmt"
-
-ansible_python_interpreter: "/usr/bin/python2"
+ansible_host: 10.1.0.3
+ansible_become: True
+ansible_user: root
