@@ -102,3 +102,10 @@
   command: >
     virtualenv-tools --update-path=auto --reinitialize {{ barbican_bin | dirname }}
   when: barbican_get_venv | changed
+
+- name: Record the venv tag deployed
+  ini_file:
+    dest: "/etc/ansible/facts.d/openstack_ansible.fact"
+    section: barbican
+    option: venv_tag
+    value: "{{ barbican_venv_tag }}"
