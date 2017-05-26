@@ -25,6 +25,9 @@
       pip:
         name: "{{ item }}"
         state: present
+        extra_args: >-
+          {{ barbican_developer_mode | ternary(pip_install_developer_constraints | default('--constraint /opt/developer-pip-constraints.txt'), '') }}
+          {{ pip_install_options | default('') }}
       with_items:
         - httplib2
         - python-barbicanclient
