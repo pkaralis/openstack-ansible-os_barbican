@@ -92,7 +92,6 @@ barbican_galera_database: barbican
 barbican_galera_user: barbican
 
 # Rabbit vars
-barbican_rpc_backend: rabbit
 barbican_rabbitmq_userid: barbican
 barbican_rabbitmq_vhost: /barbican
 
