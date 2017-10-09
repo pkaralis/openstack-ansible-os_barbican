@@ -12,26 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# (c) 2017, Jean-Philippe Evrard <jean-philippe.evrard@rackspace.co.uk>
 
-galaxy_info:
-  author: OpenStack-Ansible
-  description: Deploy Barbican with OpenStack-Ansible
-  company: OpenStack
-  license: Apache-2.0
-  min_ansible_version: 2.2
-  platforms:
-    - name: Ubuntu
-      versions:
-        - xenial
-  galaxy_tags:
-    - cloud
-    - openstack
-    - python
-    - barbican
-
-dependencies:
-  - pip_install
-  - role: apt_package_pinning
-    when:
-      - ansible_pkg_mgr == 'apt'
-  - galera_client
+maturity_info:
+  status: complete
+  created_during: ocata
