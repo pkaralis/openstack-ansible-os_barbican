@@ -1,5 +1,5 @@
 ---
-# Copyright 2015, Rackspace US, Inc.
+# Copyright 2017, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,20 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Setup the host
-- include: common/test-setup-host.yml
+tempest_run: yes
 
-# Prepare the containers
-- include: common/test-prepare-containers.yml
+tempest_plugins:
+  - name: barbican-tempest-plugin
+    repo: https://git.openstack.org/openstack/barbican-tempest-plugin
+    branch: master
 
-# Install RabbitMQ/MariaDB
-- include: common/test-install-infra.yml
+tempest_test_whitelist:
+  - barbican_tempest_plugin.tests.api
 
-# Install Keystone
-- include: common/test-install-keystone.yml
-
-# Install Barbican
-- include: test-install-barbican.yml
-
-# Install Tempest
-- include: common/test-install-tempest.yml
+tempest_roles:
+  - key-manager:service-admin
