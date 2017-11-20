@@ -1,5 +1,4 @@
----
-# Copyright 2017, Rackspace US, Inc.
+# Copyright 2016
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- project:
-    name: openstack/openstack-ansible-os_barbican
-    check:
-      jobs:
-        - openstack-ansible-linters
-        - openstack-ansible-functional-centos-7
-        - openstack-ansible-functional-ubuntu-xenial
-    gate:
-      jobs:
-        - openstack-ansible-linters
-        - openstack-ansible-functional-centos-7
-        - openstack-ansible-functional-ubuntu-xenial
+barbican_distro_packages:
+  - gcc
+  - gcc-c++
+  - gettext
+  - git
+  - httpd
+  - httpd-tools
+  - libffi-devel
+  - mod_wsgi
+  - openssl-devel
+  - postgresql-libs
+  - python-devel
