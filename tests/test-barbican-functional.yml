@@ -32,25 +32,34 @@
         - httplib2
         - python-barbicanclient
         - python-openstackclient
+
     - name: Check the barbican api
       uri:
         url: "http://localhost:9311"
         status_code: 200,300
+
     - name: Create a test secret
       shell: |
         . /root/openrc
         openstack secret store --payload secrete --payload-content-type text/plain
       register: barbican_secret_store
+      tags:
+        - skip_ansible_lint
+
     - name: Register secret location
       set_fact:
         secret_ref: "{{ item.split('|')[2] }}"
       with_items: "{{ barbican_secret_store.stdout_lines }}"
       when: item.find('Secret href') != -1
+
     - name: Retrieve test secret
       shell: |
         . /root/openrc
         openstack secret get --decrypt --payload_content_type text/plain {{ secret_ref }}
       register: barbican_secret_store
+      tags:
+        - skip_ansible_lint
+
     - name: Check retrieved secret
       assert:
         that: barbican_secret_store.stdout.find('secrete') != -1
