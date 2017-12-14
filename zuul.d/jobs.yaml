@@ -13,20 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- project:
-    name: openstack/openstack-ansible-os_barbican
-    check:
-      jobs:
-        - openstack-ansible-linters
-        - openstack-ansible-functional-centos-7
-        - openstack-ansible-functional-ubuntu-xenial
-        - openstack-ansible-barbican-ssl-nv
-    experimental:
-      jobs:
-        - openstack-ansible-integrated-deploy-aio
-    gate:
-      jobs:
-        - openstack-ansible-linters
-        - openstack-ansible-functional-centos-7
-        - openstack-ansible-functional-ubuntu-xenial
-        - openstack-ansible-barbican-ssl-nv
+- job:
+    name: openstack-ansible-barbican-ssl-nv
+    parent: openstack-ansible-functional-ubuntu-xenial
+    voting: false
+    vars:
+      tox_env: ssl

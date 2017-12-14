@@ -39,7 +39,7 @@ max_allowed_request_size_in_bytes = 1000000
 #sql_connection = sqlite:///barbican.sqlite
 # Note: For absolute addresses, use '////' slashes after 'sqlite:'
 # Uncomment for a more global development environment
-sql_connection = mysql+pymysql://{{ barbican_galera_user }}:{{ barbican_galera_password }}@{{ barbican_galera_address }}/{{ barbican_galera_database }}?charset=utf8
+sql_connection = mysql+pymysql://{{ barbican_galera_user }}:{{ barbican_galera_password }}@{{ barbican_galera_address }}/{{ barbican_galera_database }}?charset=utf8{% if barbican_galera_use_ssl | bool %}&ssl_ca={{ barbican_galera_ssl_ca_cert }}{% endif %}
 
 # Period in seconds after which SQLAlchemy should reestablish its connection
 # to the database.
