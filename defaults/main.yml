@@ -127,7 +127,6 @@ barbican_ssl_self_signed_subject: "/C=US/ST=Texas/L=San Antonio/O=IT/CN={{ inter
 # packages required to execute the role
 barbican_requires_pip_packages:
   - virtualenv
-  - virtualenv-tools
   - python-keystoneclient # Keystoneclient needed by OSA keystone lib
 
 # packages required to run the barbican service
