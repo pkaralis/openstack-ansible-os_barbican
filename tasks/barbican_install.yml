@@ -111,6 +111,7 @@
   shell: |
     find {{ barbican_bin }} -name \*.pyc -delete
     sed -si '1s/^.*python.*$/#!{{ barbican_bin | replace ('/','\/') }}\/python/' {{ barbican_bin }}/*
+    virtualenv {{ barbican_bin | dirname }}
   when: barbican_get_venv | changed
   tags:
     - skip_ansible_lint
