@@ -104,7 +104,8 @@ barbican_service_user_domain_id: default
 barbican_service_project_name: service
 
 # Apache configuration vars
-barbican_wsgi_processes: "{{ ansible_processor_vcpus | default (1) * 2 }}"
+barbican_wsgi_processes_max: 16
+barbican_wsgi_processes: "{{ [[ansible_processor_vcpus|default(2) // 2, 1] | max, barbican_wsgi_processes_max] | min }}"
 barbican_wsgi_threads: 1
 barbican_apache_log_level: info
 barbican_apache_servertokens: "Prod"
