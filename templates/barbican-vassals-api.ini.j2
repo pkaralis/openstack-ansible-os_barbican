@@ -1,7 +1,8 @@
 [uwsgi]
 socket = :9311
 protocol = http
-processes = 1
+processes = {{ barbican_wsgi_processes }}
+threads = {{ barbican_wsgi_threads }}
 lazy = true
 vacuum = true
 no-default-app = true
