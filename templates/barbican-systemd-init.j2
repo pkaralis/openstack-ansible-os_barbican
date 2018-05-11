@@ -13,7 +13,7 @@ Group={{ system_group }}
 {% if program_override is defined %}
 ExecStart={{ program_override }} {{ program_config_options|default('') }}
 {% else %}
-ExecStart={{ barbican_bin }}/{{ program_name }} {{ program_config_options|default('') }}
+ExecStart={{ program_bin }}/{{ program_name }} {{ program_config_options|default('') }}
 {% endif %}
 
 # Give a reasonable amount of time for the server to start up/shut down

@@ -21,6 +21,9 @@ debug: False
 barbican_package_state: "latest"
 barbican_pip_package_state: "latest"
 
+# Set installation method.
+barbican_install_method: "source"
+
 # Toggle keystone authentication for barbican
 barbican_keystone_auth: no
 
@@ -79,7 +82,7 @@ barbican_developer_constraints:
 
 # Name of the virtual env to deploy into
 barbican_venv_tag: untagged
-barbican_bin: "/openstack/venvs/barbican-{{ barbican_venv_tag }}/bin"
+barbican_bin: "{{ _barbican_bin }}"
 
 # venv_download, even when true, will use the fallback method of building the
 # venv from scratch if the venv download fails.

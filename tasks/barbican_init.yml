@@ -16,6 +16,7 @@
 - include: barbican_init_common.yml
   vars:
     program_name: "{{ barbican_uwsgi_program_name }}"
+    program_bin: "{{ barbican_uwsgi_bin }}"
     program_config_options: "{{ barbican_uwsgi_options }}"
     service_name: "{{ barbican_service_name }}"
     system_user: "{{ barbican_system_user_name }}"

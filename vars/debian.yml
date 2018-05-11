@@ -20,3 +20,13 @@ barbican_distro_packages:
   - libffi-dev
   - gettext
   - build-essential
+
+barbican_service_distro_packages:
+  - barbican-api
+  - barbican-keystone-listener
+  - barbican-worker
+  - python-pymysql # needed by /usr/bin/barbican-manage db upgrade.
+  - uwsgi
+  - uwsgi-plugin-python
+
+barbican_uwsgi_bin: '/usr/bin'

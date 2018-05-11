@@ -19,3 +19,14 @@ barbican_distro_packages:
   - libopenssl-devel
   - postgresql-devel
   - python-devel
+
+barbican_service_distro_packages:
+  - openstack-barbican
+  - openstack-barbican-api
+  - openstack-barbican-keystone-listener
+  - openstack-barbican-retry
+  - openstack-barbican-worker
+  - uwsgi
+  - uwsgi-python
+
+barbican_uwsgi_bin: '/usr/sbin'
