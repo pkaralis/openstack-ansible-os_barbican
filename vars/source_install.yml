@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-barbican_package_list: "{{ barbican_distro_packages }}"
+barbican_package_list: "{{ barbican_distro_packages + barbican_devel_distro_packages }}"
 _barbican_bin: "/openstack/venvs/barbican-{{ barbican_venv_tag }}/bin"
 barbican_uwsgi_bin: "{{ _barbican_bin }}"

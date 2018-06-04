@@ -13,6 +13,9 @@
 # limitations under the License.
 
 barbican_distro_packages:
+  - git
+
+barbican_devel_distro_packages:
   - gcc
   - gcc-c++
   - gettext

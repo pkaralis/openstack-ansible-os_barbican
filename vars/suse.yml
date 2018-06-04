@@ -13,8 +13,10 @@
 # limitations under the License.
 
 barbican_distro_packages:
-  - gettext-runtime
   - git-core
+
+barbican_devel_distro_packages:
+  - gettext-runtime
   - libffi-devel
   - libopenssl-devel
   - postgresql-devel

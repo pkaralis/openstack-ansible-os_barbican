@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-barbican_package_list: "{{ barbican_service_distro_packages }}"
+barbican_package_list: "{{ barbican_distro_packages + barbican_service_distro_packages }}"
 _barbican_bin: "/usr/bin"
