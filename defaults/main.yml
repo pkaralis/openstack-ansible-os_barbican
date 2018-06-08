@@ -140,6 +140,7 @@ barbican_ssl_self_signed_subject: "/C=US/ST=Texas/L=San Antonio/O=IT/CN={{ inter
 # packages required to run the barbican service
 barbican_pip_packages:
   - barbican
+  - osprofiler
   - PyMySQL
   - python-memcached
   - uwsgi
