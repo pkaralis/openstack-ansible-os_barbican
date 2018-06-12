@@ -42,4 +42,3 @@
     - role: "os_barbican"
   vars_files:
     - common/test-vars.yml
-    - test-vars.yml
