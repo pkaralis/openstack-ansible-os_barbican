@@ -16,5 +16,8 @@ This Ansible role installs and configures OpenStack Barbican.
 Documentation for the project can be found at:
   https://docs.openstack.org/openstack-ansible-os_barbican/latest/
 
+Release notes for the project can be found at:
+  https://docs.openstack.org/releasenotes/openstack-ansible-os_barbican/
+
 The project home is at:
   https://launchpad.net/openstack-ansible
