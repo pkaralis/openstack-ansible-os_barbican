@@ -54,6 +54,18 @@
       delay: 10
       no_log: True
 
+    - name: Add service roles
+      os_keystone_role:
+        cloud: default
+        state: present
+        name: "{{ item }}"
+        verify: "{{ not keystone_service_adminuri_insecure }}"
+      with_items: "{{ barbican_default_role_names }}"
+      register: barbican_roles
+      until: barbican_roles is success
+      retries: 5
+      delay: 10
+
     - name: Add service user to admin roles
       os_user_role:
         cloud: default
