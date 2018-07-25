@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- include: barbican_init_common.yml
+- include_tasks: barbican_init_common.yml
   vars:
     program_name: "{{ barbican_uwsgi_program_name }}"
     program_bin: "{{ barbican_uwsgi_bin }}"
